@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #005aff;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.product-card {
+    width: 220px;
+    height: 350px; /* Defina uma altura fixa para o card */
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Alinha os itens dentro do card */
+}
+
+.product-card:hover {
+    transform: scale(1.10);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Altura fixa para as imagens */
+    border-radius: 5px;
+    object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
+}
+
+.product-name {
+    font-size: 15px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.product-preco {
+    color: #020d53;
+    font-size: medium;
+}
+
+.add-to-cart {
+    background-color: #000000;
+    color: #fff;
+    padding: 8px 16px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-to-cart:hover {
+    background-color: #020d53;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #efebeb;
+}
+
+.logo {
+    position: absolute;
+    top: 7px;
+    left: 650px;
+    font-family: 'Creepster', cursive;
+    font-size: 30px;
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 8px;
+    border: 3px solid #020d53; /* Borda ao redor do logo */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+#logoimg {
+    position: absolute;
+    top: 10px;
+    left: 590px;
+    font-size: 3rem;
+}
+
+#logoimg:hover {
+    color: darkblue;
+}

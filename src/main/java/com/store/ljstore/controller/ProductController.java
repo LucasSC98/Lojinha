@@ -19,17 +19,11 @@ public class ProductController {
 
     @GetMapping
     public String listarProdutos(@RequestParam(defaultValue = "nome") String sortBy,  Model model) {
-        List<Product> produtos;
-        switch (sortBy){
-            case "preco":
-                produtos = productRepository.findAllByOrderByPrecoAsc();
-                break;
-            case "nome":
-                produtos = productRepository.findAllByOrderByNomeAsc();
-                break;
-            default:
-                produtos = productRepository.findAllByOrderByNomeAsc();
-        }
+        List<Product> produtos = switch (sortBy) {
+            case "preco_unitario" -> productRepository.findAllByOrderByPrecoUnitarioAsc();
+            case "nome" -> productRepository.findAllByOrderByNomeAsc();
+            default -> productRepository.findAllByOrderByNomeAsc();
+        };
 
         model.addAttribute("produtos", produtos);
         model.addAttribute("sortby" ,sortBy);
@@ -59,10 +53,40 @@ public class ProductController {
         }
         Product produto = new Product();
         produto.setNome(dto.nome());
-        produto.setPreco(dto.preco());
-        produto.setImgUrl(dto.imgUrl());
+        produto.setPrecoUnitario(dto.preco());
+//        produto.setImgUrl(dto.imgUrl());
+        produto.setQuantidade(dto.quantidade());
 
         this.productRepository.save(produto);
         return ResponseEntity.ok(produto);
     }
+    @ResponseBody
+    @PutMapping("/api/produtos/{id}")
+    public ResponseEntity<Product> update(@PathVariable int id, @RequestBody ProductRequestDTO dto) {
+        Product produto = this.productRepository.findById(id)
+             .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado"));
+
+        produto.setNome(dto.nome());
+        produto.setPrecoUnitario(dto.preco());
+//        produto.setImgUrl(dto.imgUrl());
+        produto.setQuantidade(dto.quantidade());
+
+        this.productRepository.save(produto);
+        return ResponseEntity.ok(produto);
+    }
+    @ResponseBody
+    @DeleteMapping("/api/produtos/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        Product produto = this.productRepository.findById(id)
+             .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado"));
+        this.productRepository.delete(produto);
+        return ResponseEntity.noContent().build();
+    }
+    @ResponseBody
+    @GetMapping("/api/produtos/search/{nome}")
+    public ResponseEntity<List<Product>> search(@PathVariable String nome) {
+        List<Product> produto = this.productRepository.findAllByNomeContaining(nome);
+        return ResponseEntity.ok(produto);
+    }
+
 }

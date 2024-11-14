@@ -15,19 +15,22 @@ import lombok.Setter;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produto")
+    @Column(name = "item_id")
     private Integer id;
 
     @Column(name = "nome") // nome da coluna no banco
     private String nome;
 
-    @Column(name = "preco") // nome da coluna no banco
-    private double preco;
+    @Column(name = "preco_unitario") // nome da coluna no banco
+    private double precoUnitario;
 
     @Column(name = "imgUrl") // nome da coluna no banco
     private String imgUrl;
 
     @Column(name = "quantidade")
     private Integer quantidade;
+
+    @Column(name = "descricao")
+    private String descricao;
 
 }

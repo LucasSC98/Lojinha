@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Loja Online</title>
@@ -25,25 +25,38 @@
   <form method="get" action="/home">
     <label for="sortBy">Ordenar por:</label>
     <select name="sortBy" id="sortBy" onchange="this.form.submit()">
-      <option value="nome" th:selected="${sortBy == 'nome'}">Nome</option>
-      <option value="preco" th:selected="${sortBy == 'preco'}">Preço</option>
+      <option value="nome" th:selected="${sortBy == 'nome'}">Nome</option>>
+      <option value="preco" th:selected="${sortby == 'preco'}">Preço</option>
 
     </select>
   </form>
 </div>
 
 <section id="produtos" class="products">
-  <div class="product-card" th:each="produto : ${produtos}">
+  <div class="product-card" th:each="produto : ${produtos}" th:data-id="${produto.id}">
     <img th:src="${produto.imgUrl}" alt="Imagem do Produto" class="product-image">
     <h3 class="product-name" th:text="${produto.nome}"></h3>
-    <h4 class="product-preco" th:text="'R$: '+ ${produto.preco}"></h4>
-    <h6 class="product-estoque" th:text="${produto.quantidade}"></h6>
-    <button class="add-to-cart">Comprar</button>
+    <h4 class="product-preco" th:text="'R$: '+ ${produto.precoUnitario}"></h4>
+    <button class="view-details">Ver Todos Detalhes</button>
   </div>
 </section>
+
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="modalProductImg" src="" alt="Imagem do Produto" class="product-image">;
+    <h2 id="modalProductName"></h2>
+    <p id="modalProductPrice"></p>
+    <p id="modalProductQuantity"></p>
+    <p id="modalProductDescription"></p>
+    <button id="comprarProduto" class="comprarProduto">Comprar</button>
+  </div>
+</div>
 
 <footer>
   <p>.....</p>
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/script.js"></script>
 </body>
 </html>
